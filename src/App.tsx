@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
+import '@uppy/core/dist/style.min.css';
 import styled from 'styled-components';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
@@ -12,6 +13,9 @@ import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
+import Uppy from '@uppy/core';
+import { DragDrop } from '@uppy/react';
+import ThumbnailGenerator from '@uppy/thumbnail-generator';
 
 const Title = styled.h1`
   font-size: 1.5em;
@@ -32,6 +36,13 @@ const actions = [
 ];
 
 function App() {
+  const [preview, setPreview] = useState<string | null>(null);
+  const uppy = new Uppy().use(ThumbnailGenerator).on('thumbnail:generated', (file, preview) => {
+    console.log(file, preview);
+    setPreview(preview);
+  });
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -48,6 +59,8 @@ function App() {
         >
           Learn React
         </a>
+        <DragDrop uppy={uppy} onDrop={e => console.log(e)} />
+        {preview && <img src={preview}></img>}
         <SpeedDial
           ariaLabel="SpeedDial basic example"
           sx={{ position: 'absolute', bottom: 16, right: 16 }}
