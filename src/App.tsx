@@ -1,5 +1,4 @@
 import { useEffect, useReducer } from 'react';
-import './App.css';
 import '@uppy/core/dist/style.min.css';
 import styled from 'styled-components';
 import Map from './map/Map';
