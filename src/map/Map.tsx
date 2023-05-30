@@ -1,10 +1,8 @@
 import 'leaflet/dist/leaflet.css';
-import '@uppy/core/dist/style.min.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import markerIconPng from "leaflet/dist/images/marker-icon.png"
-import { Icon } from 'leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet';
 import { useContext } from 'react';
-import { AppContext } from './state/context';
+import { AppContext } from '../state/context';
+import MapMarker from './MapMarker';
 
 export default function Map(props: { className?: string }) {
   const { state } = useContext(AppContext);
@@ -16,11 +14,7 @@ export default function Map(props: { className?: string }) {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {state.restaurants.map(r => {
-          return (<Marker position={[r.location.lat, r.location.lng]} icon={new Icon({ iconUrl: markerIconPng, iconSize: [25, 41], iconAnchor: [12, 41] })}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>)
+          return (<MapMarker restaurant={r}></MapMarker>)
         })}
       </MapContainer>
     </div>
