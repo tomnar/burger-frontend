@@ -18,7 +18,6 @@ export const reducer = (state: Store, action: Action) => {
       return { ...state, reviewingRestaurant }
     case "ADD_RATING":
       const { restaurant, rating } = action.payload;
-      if (!restaurant) return state;
       const updatedRestaurants = state.restaurants.map((r) => {
         if (r.name === restaurant.name) {
           return {

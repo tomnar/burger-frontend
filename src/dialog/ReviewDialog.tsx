@@ -20,23 +20,27 @@ type RatingItem = { name: string; value: number; onChange: (event: SyntheticEven
 type SimpleDialogProps = {
   open: boolean;
   restaurant: Restaurant | null;
-  onClose: (raiting: TRating, restaurant: Restaurant | null) => void;
+  onClose: (raiting: TRating, restaurant: Restaurant | null, file: UppyFile | null) => void;
 }
 export default function ReviewDialog(props: SimpleDialogProps) {
   const { onClose, restaurant, open } = props;
   const initialState = { taste: 0, texture: 0, presentation: 0, image: ''};
   const [ratingValues, setRatingValues] = useState<TRating>(initialState);
+  const [file, setFile] = useState<UppyFile | null>(null);
 
-  const handleRatingChange = (name: string, value: number | null | UppyFile) => {
-    setRatingValues(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+  const handleRatingChange = (name: string, value: number | null) => {
+    setRatingValues(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleClose = (rating: TRating, restaurant: Restaurant | null) => {
+  const handleImageChange = (file: UppyFile) => {
+    setRatingValues(prevState => ({ ...prevState, image: file?.preview || '' }));
+    setFile(file);
+  }
+
+  const handleClose = (rating: TRating, restaurant: Restaurant | null, file: UppyFile | null) => {
     setRatingValues(initialState);
-    onClose(rating, restaurant);
+    setFile(null);
+    onClose(rating, restaurant, file);
   };
 
   const ratings: RatingItem[] = [
@@ -46,9 +50,9 @@ export default function ReviewDialog(props: SimpleDialogProps) {
   ]
 
   return (  
-    <Dialog onClose={() => handleClose(ratingValues, null)} open={open}>
+    <Dialog onClose={() => handleClose(ratingValues, null, null)} open={open}>
       <DialogTitle>Review {restaurant?.name ?? ''}</DialogTitle>
-      <Upload onChange={image => handleRatingChange('image', image)}></Upload>
+      <Upload onChange={image => handleImageChange(image)}></Upload>
       {ratings.map((r, idx) => (
         <RatingWrapper key={idx}>
           <Typography component="legend">{r.name}</Typography>
@@ -60,7 +64,7 @@ export default function ReviewDialog(props: SimpleDialogProps) {
         </RatingWrapper>
       ))}
       <ReviewButton variant="contained" onClick={() => {
-        handleClose(ratingValues, restaurant);
+        handleClose(ratingValues, restaurant, file);
       }}>Add review</ReviewButton>
     </Dialog>
   );

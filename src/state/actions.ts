@@ -31,11 +31,11 @@ export const setReviewingRestaurant = (
 
 export const addRating = (
   rating: Rating,
-  restaurant: Restaurant | null
+  restaurant: Restaurant
 ): {
   type: "ADD_RATING",
   payload: {
-    restaurant: Restaurant | null,
+    restaurant: Restaurant,
     rating: Rating,
   }
 } => ({

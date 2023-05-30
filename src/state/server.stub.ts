@@ -1,4 +1,5 @@
-import { Restaurant } from "../types";
+import { UppyFile } from "@uppy/core";
+import { Rating, Restaurant } from "../types";
 
 const RestaurantMockData: Restaurant[] = [
   {
@@ -22,7 +23,7 @@ const RestaurantMockData: Restaurant[] = [
         taste: 4,
         texture: 4,
         presentation: 2,
-        image: null
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Hamburger_i_restaurant.jpg/320px-Hamburger_i_restaurant.jpg'
       },
       {
         taste: 4,
@@ -47,7 +48,7 @@ const RestaurantMockData: Restaurant[] = [
         taste: 3,
         texture: 3,
         presentation: 3,
-        image: null
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Burger_King_Whopper_Combo.jpg/320px-Burger_King_Whopper_Combo.jpg'
       }
     ]
   }
@@ -60,4 +61,23 @@ export function loadData() {
       resolve(RestaurantMockData);
     }, Math.floor(Math.random() * 300));
   })
+}
+
+export function uploadFile(file: UppyFile | null) {
+  return new Promise<string | null>((resolve) => {
+    if (!file) {
+      resolve(null);
+    } else {
+      // add logic for handling updload of file.
+      setTimeout(() => {
+        resolve('https://blank.com'); // File location of uploaded file
+      }, Math.floor(Math.random() * 300));
+    }
+  })
+}
+
+export function uploadRating(rating: Rating, restaurant: Restaurant) {
+  // add logic for handling updload of file and data.
+  // we are optimistic, se we do not wait for the server to return the data, but add it directly to our context.
+  return;
 }

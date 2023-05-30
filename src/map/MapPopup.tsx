@@ -28,6 +28,13 @@ const MenuWrapper = styled.div`
   margin-top: 1rem;
 `;
 
+const Image = styled.img`
+  width: 100%;
+  height: 7rem;
+  object-fit: cover;
+  margin-bottom: -0.5rem;
+`;
+
 const weekDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 type MapPopupProps = { restaurant: Restaurant }
@@ -39,9 +46,11 @@ export default function MapPopup({ restaurant }: MapPopupProps) {
     { name: 'Texture', value: ratings.reduce((sum, r) => { return sum + r.texture }, 0) / ratings.length },
     { name: 'Presentation', value: ratings.reduce((sum, r) => { return sum + r.presentation }, 0) / ratings.length }
   ]
+  const mostRecentImage = [...ratings].reverse().find(r => r.image)?.image || null;
   return (
     <div>
-      <Typography component="h2">{restaurant.name} ({ratings.length})</Typography>
+      <Typography variant="overline">{restaurant.name} ({ratings.length})</Typography>
+      {mostRecentImage && <Image src={mostRecentImage} alt="Most Recent Image" />}
       <hr></hr>
       <Typography component="p">{restaurant.descripion}</Typography>
       {ratingsArray.map((r, idx) => (
