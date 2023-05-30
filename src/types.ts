@@ -6,8 +6,16 @@ type Location = {
   address: string;
 }
 
+export type Rating = {
+  taste: number,
+  texture: number,
+  presentation: number,
+  image: string;
+}
+
 export type Restaurant = {
   name: string;
   location: Location;
   descripion: string;
+  ratings: Rating[];
 }

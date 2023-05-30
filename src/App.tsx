@@ -1,11 +1,13 @@
 import { useEffect, useReducer } from 'react';
 import './App.css';
+import '@uppy/core/dist/style.min.css';
 import styled from 'styled-components';
 import Map from './map/Map';
 import { Store, initialState, reducer } from './state/reducer';
 import { Action, setRestaurants } from './state/actions';
 import { AppContext } from './state/context';
 import { loadData } from './state/server.stub';
+import ReviewPopup from './ReviewDialog';
 
 const MapWrapper = styled(Map)`
   height: 100vh;
@@ -22,6 +24,7 @@ function App() {
     <div className="App">
       <AppContext.Provider value={{ state, dispatch }}>
         <MapWrapper></MapWrapper>
+        <ReviewPopup></ReviewPopup>
       </AppContext.Provider>
     </div>
   );

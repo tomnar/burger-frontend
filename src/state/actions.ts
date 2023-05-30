@@ -14,5 +14,20 @@ export const setRestaurants = (
   }
 });
 
+export const setReviewingRestaurant = (
+  restaurant: Restaurant | null
+): {
+  type: "SET_REVIEWING_RESTAURANT",
+  payload: {
+    restaurant: Restaurant | null
+  }
+} => ({
+  type: "SET_REVIEWING_RESTAURANT",
+  payload: {
+    restaurant
+  }
+});
+
 export type Action =
   | ReturnType<typeof setRestaurants>
+  | ReturnType<typeof setReviewingRestaurant>

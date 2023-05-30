@@ -13,8 +13,8 @@ export default function Map(props: { className?: string }) {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {state.restaurants.map(r => {
-          return (<MapMarker restaurant={r}></MapMarker>)
+        {state.restaurants.map((r, idx) => {
+          return (<MapMarker key={idx} restaurant={r}></MapMarker>)
         })}
       </MapContainer>
     </div>

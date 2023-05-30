@@ -8,7 +8,8 @@ const RestaurantMockData: Restaurant[] = [
       lat: 51.505,
       lng: -0.09,
       address: 'Porter Street 123'
-    }
+    },
+    ratings: []
   },
   {
     name: 'Your Burgers',
@@ -17,7 +18,8 @@ const RestaurantMockData: Restaurant[] = [
       lat: 51.605,
       lng: -0.29,
       address: 'Porter Street 3'
-    }
+    },
+    ratings: []
   }
 ]
 
