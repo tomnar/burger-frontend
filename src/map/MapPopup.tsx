@@ -44,8 +44,8 @@ export default function MapPopup({ restaurant }: MapPopupProps) {
       <Typography component="h2">{restaurant.name} ({ratings.length})</Typography>
       <hr></hr>
       <Typography component="p">{restaurant.descripion}</Typography>
-      {ratingsArray.map(r => (
-        <RatingWrapper>
+      {ratingsArray.map((r, idx) => (
+        <RatingWrapper key={idx}>
           <Typography component="legend">{r.name}</Typography>
           <Rating readOnly precision={0.1} name={r.name} value={r.value} />
           <Typography component="div">{r.value.toFixed(1)}</Typography>
@@ -53,7 +53,7 @@ export default function MapPopup({ restaurant }: MapPopupProps) {
       ))}
       <Typography component="h3" mt={2}>Opening Hours</Typography>
       {restaurant.openingHours.map((oh, idx) => (
-        <OpeningHourWrapper>
+        <OpeningHourWrapper key={idx}>
           <Typography component="div">{weekDays[idx]}</Typography>
           <Typography component="div">{oh}</Typography>
         </OpeningHourWrapper>
