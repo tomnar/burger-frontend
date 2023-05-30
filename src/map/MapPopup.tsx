@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Restaurant } from "../types";
-import { Button, Typography, Rating, Link, Icon } from '@mui/material';
+import { Button, Typography, Rating, Link } from '@mui/material';
 import { AppContext } from "../state/context";
 import { useContext } from "react";
 import { setReviewingRestaurant } from "../state/actions";

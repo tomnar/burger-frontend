@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# This is code example
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`burger-frontend` was done as a react demo showcasing how a frontend for a burger rating system could be build using 3-4 hours.  
+Note: The restaurants are placed in Billund. If you accept to share your location you have to move the map to Billund to see them.
 
-## Available Scripts
+# How to run
 
-In the project directory, you can run:
+The app is easy to run locally. Just run `npm i` followed by `npm start`.
 
-### `npm start`
+## Used libraries
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- styled-components: Used for styling components.
+- leaflet: Used for displaying a map.
+- craco: Used for updating CRA's webpack config.
+- uppy: Used for handling File Upload.
+- MUI: Used as design system.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+## Overall architecture and hosting
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) with minimal changes.  
+Craco was added to be able to update the webpack configuration without having to eject. It was needed because styled-components was used instead of emotion.js. 
+Ideally a hook should be used, that triggers on every commit to main, make a new build by running `npm run build` and use the result on a static file host.  
+E.g. Azure's [Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) would be an easy way of getting started.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## TODOs
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+There are many features that could be added.  
+- [ ] Real Backend (Obviously)
+- [ ] Add Tests (!)
+- [ ] User Login
+- [ ] Features: Add restaurant, CRUD review, See all Reviews etc.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Backend
 
-### `npm run eject`
+There is very little interaction with a potential backend in this app.  
+All needed data is fetched when the app loads.  
+Since the user can add ratings, this has to be handled too. This includes handling of image uploads.  
+For the purpose of this example, I have mocked the server.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Security
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The data in the app is open for everyone. Ideally there would be a login, so data could be attached to users and thereby be verified.  
+Adding a user layer was out of scope for this app. This would enable users to delete (own!) reviews etc, maybe even make private reviews that are hidden from public.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Scaling
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+A lot can be improved to make the app scale better. It helps a lot, that the app is so simple.  
+Initially fetching *all* data is definitely somethign that can be improved. Ideally it will only fetch data that is within the users viewport.  
 
-## Learn More
+## State
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To keep data handling easy, Context has been used for state. It is set initially and is updated through dispatched actions where needed.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Data Structure
+
+The data structure is kept as simple as possible. All data is held in an array of Restaurant-objects:
+![Data Structure](/Data.png?raw=true)
