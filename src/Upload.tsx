@@ -16,7 +16,7 @@ export default function Upload({ onChange }: UploadProps) {
   return (
     <>
       <DragDrop uppy={uppy}></DragDrop>
-      {preview && <img src={preview}></img>}
+      {preview && <img src={preview} alt="Image Preview"></img>}
     </>
   )
 }

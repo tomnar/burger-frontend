@@ -10,7 +10,7 @@ export type Rating = {
   taste: number,
   texture: number,
   presentation: number,
-  image: string;
+  image: string | null;
 }
 
 export type Restaurant = {
@@ -18,4 +18,6 @@ export type Restaurant = {
   location: Location;
   descripion: string;
   ratings: Rating[];
+  link: string | null;
+  openingHours: string[]; // Assumes array with 7 strings, starting with monday
 }
