@@ -14,8 +14,21 @@ export const reducer = (state: Store, action: Action) => {
       const restaurants = action.payload.restaurants;
       return { ...state, restaurants };
     case "SET_REVIEWING_RESTAURANT":
-      const restaurant = action.payload.restaurant;
-      return { ...state, reviewingRestaurant: restaurant}
+      const reviewingRestaurant = action.payload.restaurant;
+      return { ...state, reviewingRestaurant }
+    case "ADD_RATING":
+      const { restaurant, rating } = action.payload;
+      if (!restaurant) return state;
+      const updatedRestaurants = state.restaurants.map((r) => {
+        if (r.name === restaurant.name) {
+          return {
+            ...r,
+            ratings: [...r.ratings, rating],
+          };
+        }
+        return r;
+      });
+      return { ...state, restaurants: updatedRestaurants, reviewingRestaurant: null };
     default:
       console.error("Reducer called with unknown action: " + action)
       return state;

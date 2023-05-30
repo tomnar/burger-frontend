@@ -7,7 +7,7 @@ import { Store, initialState, reducer } from './state/reducer';
 import { Action, setRestaurants } from './state/actions';
 import { AppContext } from './state/context';
 import { loadData } from './state/server.stub';
-import ReviewPopup from './dialog/ReviewDialog';
+import ReviewPopup from './dialog/DialogWrapper';
 
 const MapWrapper = styled(Map)`
   height: 100vh;

@@ -1,3 +1,4 @@
+import { Rating } from "../types";
 import { Restaurant } from "../types";
 
 export const setRestaurants = (
@@ -28,6 +29,24 @@ export const setReviewingRestaurant = (
   }
 });
 
+export const addRating = (
+  rating: Rating,
+  restaurant: Restaurant | null
+): {
+  type: "ADD_RATING",
+  payload: {
+    restaurant: Restaurant | null,
+    rating: Rating,
+  }
+} => ({
+  type: "ADD_RATING",
+  payload: {
+    restaurant,
+    rating,
+  }
+});
+
 export type Action =
   | ReturnType<typeof setRestaurants>
   | ReturnType<typeof setReviewingRestaurant>
+  | ReturnType<typeof addRating>
